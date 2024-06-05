@@ -2,32 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  .captionText {
+    @apply text-slate-800 dark:text-slate-50 font-kanit text-xl;
+  }
+  .labelText {
+    @apply text-slate-500 dark:text-slate-300 font-kanit text-lg lg:text-xl xl:text-2xl 2xl:text-3xl;
+  }
+
+  .primaryText {
+    @apply text-slate-700 dark:text-slate-50 font-kanit text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl;
+  }
+
+  .primaryTextFocused {
+    @apply text-slate-700 dark:text-slate-50 font-kanit font-bold text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl;
+  }
+
+  .secondaryText {
+    @apply text-slate-500 dark:text-slate-200 font-mono text-base xl:text-lg 2xl:text-xl;
   }
 }
