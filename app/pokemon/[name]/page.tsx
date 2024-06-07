@@ -5,6 +5,7 @@ import React, { Suspense } from "react";
 import Sprites from "./Sprites";
 import StatsBox from "@/components/StatsBox";
 import MoveBox from "@/components/MoveBox";
+import EvolutionBox from "@/components/EvolutionBox";
 
 interface Props {
   params: { name: string };
@@ -14,7 +15,11 @@ interface Props {
 async function PokemonDetails({ params }: Props) {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`);
   const pokemon = await res.json();
-  // console.log(pokemon.sprites.other);
+
+  const res2 = await fetch(pokemon.species.url);
+  const species = await res2.json();
+
+  // console.log(evolution);
 
   return (
     <div className="font-kanit w-full h-full flex  p-4 text-slate-700 dark:text-slate-50">
@@ -74,6 +79,9 @@ async function PokemonDetails({ params }: Props) {
           <p>{/* <AbilityBox abilities={pokemon.abilities} /> */}</p>
         </div>
         <StatsBox stats={pokemon.stats} />
+        <div className="col-span-1 sm:col-span-2">
+          <EvolutionBox species={species} />
+        </div>
         <div className="col-span-1 sm:col-span-2">
           <MoveBox moves={pokemon.moves} />
         </div>

@@ -47,9 +47,10 @@ function StatsBox({ stats }: Props) {
       ? "white"
       : "black";
 
-  console.log(systemTheme);
   const data: ChartData<"bar"> = {
-    labels: stats.map((stat) => formatName(stat.stat.name)),
+    labels: stats.map((stat) =>
+      formatName(stat.stat.name.replace("special", "sp."))
+    ),
     datasets: [
       {
         label: "Base Stat",
