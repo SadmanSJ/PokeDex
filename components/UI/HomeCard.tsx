@@ -2,12 +2,22 @@ import Image from "next/image";
 import React from "react";
 import TypeBox from "../TypeBox";
 import Link from "next/link";
+import { GetSpriteURL } from "@/functions/getSprite";
+import { Pokemon } from "@/interface";
 
 interface Props {
-  pokemon: any;
+  pokemon: Pokemon;
 }
 
 async function HomeCard({ pokemon }: Props) {
+  // console.log(
+  //   GetSpriteURL.pokemon({
+  //     id: pokemon.id,
+  //     spriteType: "home",
+  //   }),
+  //   pokemon.sprites.other.home
+  // );
+
   return (
     <div className="relative mx-auto flex flex-col items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 border shadow-lg dark:border-gray-800 p-4 m-2 font-kanit">
       <div className="absolute top-2 left-2 flex  items-center">
@@ -25,7 +35,7 @@ async function HomeCard({ pokemon }: Props) {
       >
         <Image
           className="dark:brightness-90"
-          src={pokemon.sprites.other.home.front_default}
+          src={pokemon.sprites.other["official-artwork"].front_default}
           alt={pokemon.name}
           width={300}
           height={300}

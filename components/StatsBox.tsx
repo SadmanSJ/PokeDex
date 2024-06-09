@@ -14,6 +14,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useTheme } from "next-themes";
 import { formatName } from "@/functions/formatNames";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(
   CategoryScale,
@@ -21,7 +22,8 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels // Register the plugin
 );
 
 interface Props {
@@ -121,6 +123,15 @@ function StatsBox({ stats }: Props) {
           size: 24, // Increase chart title font size
         },
         color: textColor,
+      },
+      datalabels: {
+        anchor: "end",
+        align: "left",
+        color: textColor,
+        font: {
+          size: 15,
+        },
+        formatter: (value) => value.toString(), // Display the value as a string
       },
     },
   };

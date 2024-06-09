@@ -21,8 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        suppressHydrationWarning={true}
-        className={`${inter.variable} ${kanit.variable} flex min-h-screen flex-col items-center justify-start text-black dark:text-white bg-slate-200 dark:bg-gray-700`}
+        className={`${inter.variable} ${kanit.variable} flex flex-col grow min-h-scree  items-center justify-start text-black dark:text-white bg-slate-200 dark:bg-gray-700`}
       >
         <ThemeProvider
           defaultTheme="system"
@@ -31,7 +30,8 @@ export default function RootLayout({
           enableColorScheme
         >
           <Navbar />
-          <main className="flex container mx-auto transition-all">
+
+          <main className="flex flex-grow w-full h-full container mx-auto transition-all">
             {children}
           </main>
         </ThemeProvider>

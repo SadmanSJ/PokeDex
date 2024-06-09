@@ -1,8 +1,9 @@
+import { PokemonSprites } from "@/interface";
 import Image from "next/image";
 import React, { useState } from "react";
 
 interface Props {
-  sprites: any;
+  sprites: PokemonSprites;
 }
 function Sprites({ sprites }: Props) {
   // const [profile, setProfile] = useState("front_default");
@@ -10,7 +11,7 @@ function Sprites({ sprites }: Props) {
     <div className="shrink-0 aspect-square pt-4 bg-gradient-to-t from-slate-50 dark:from-slate-800/30 via-transparent to-transparent rounded-full">
       <div className="w-full p-4 md:p-0">
         <Image
-          src={sprites.other.dream_world["front_default"]}
+          src={sprites.other["official-artwork"].front_default}
           alt={"sprite"}
           width={700}
           height={700}

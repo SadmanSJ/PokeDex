@@ -19,8 +19,6 @@ async function PokemonDetails({ params }: Props) {
   const res2 = await fetch(pokemon.species.url);
   const species = await res2.json();
 
-  // console.log(evolution);
-
   return (
     <div className="font-kanit w-full h-full flex  p-4 text-slate-700 dark:text-slate-50">
       <div className="relative w-full grid grid-cols-1 sm:grid-cols-2 gap-6 place-content-center">
