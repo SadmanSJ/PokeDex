@@ -12,9 +12,6 @@ function TypeBox({ types, size, type }: Props) {
   const typeColor = tv({
     base: `px-2 py-1 flex items-center justify-center capitalize shadow-md text-gray-100 font-semibold`,
     variants: {
-      // type: Object.keys(colors).map((m) => ({
-      //   [m]: `bg-[${colors[m]}] dark:brightness-90`,
-      // })),
       size: {
         xs: "text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl rounded-sm min-w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 2xl:w-36",
         sm: "text-md rounded-sm",

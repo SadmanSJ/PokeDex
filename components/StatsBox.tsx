@@ -40,20 +40,34 @@ interface Props {
 function StatsBox({ stats }: Props) {
   const { theme, systemTheme } = useTheme();
 
-  const textColor =
+  const currentTheme =
     theme === "system"
       ? systemTheme === "dark"
-        ? "white"
-        : "black"
+        ? "dark"
+        : "light"
       : theme === "dark"
-      ? "white"
-      : "black";
+      ? "dark"
+      : "light";
+
+  const textColor = currentTheme === "dark" ? "white" : "black";
 
   const data: ChartData<"bar"> = {
     labels: stats.map((stat) =>
       formatName(stat.stat.name.replace("special", "sp."))
     ),
     datasets: [
+      {
+        label: "Effort",
+        backgroundColor: "rgba(0, 50, 255, 0.4)",
+        borderColor: "rgba(10, 120, 250, 1)",
+        borderWidth: 1,
+        data: stats.map((stat) => stat.effort),
+        datalabels: {
+          // color: "rgba(75, 192, 192, 1)",
+          anchor: "end",
+          align: "right",
+        },
+      },
       {
         label: "Base Stat",
         backgroundColor: "rgba(75,192,192,0.4)",
@@ -63,6 +77,11 @@ function StatsBox({ stats }: Props) {
         hoverBorderColor: "rgba(75,192,192,1)",
         data: stats.map((stat) => stat.base_stat),
         barThickness: 30, // Increase bar thickness
+        datalabels: {
+          // color: "rgba(75, 192, 192, 1)",
+          anchor: "end",
+          align: "left",
+        },
       },
     ],
   };
@@ -72,6 +91,7 @@ function StatsBox({ stats }: Props) {
     scales: {
       x: {
         beginAtZero: true,
+        // stacked: true,
         title: {
           display: false,
           text: "Base Stat",
@@ -87,6 +107,7 @@ function StatsBox({ stats }: Props) {
         },
       },
       y: {
+        stacked: true,
         title: {
           display: false,
           text: "Stats",
@@ -109,8 +130,9 @@ function StatsBox({ stats }: Props) {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
+        display: true,
         labels: {
+          color: textColor,
           font: {
             size: 18, // Increase legend font size
           },
@@ -118,20 +140,18 @@ function StatsBox({ stats }: Props) {
       },
       title: {
         display: true,
-        text: "Base Stats",
+        text: "Stats",
         font: {
           size: 24, // Increase chart title font size
         },
         color: textColor,
       },
       datalabels: {
-        anchor: "end",
-        align: "left",
         color: textColor,
         font: {
           size: 15,
         },
-        formatter: (value) => value.toString(), // Display the value as a string
+        formatter: (value) => (value === 0 ? null : value.toString()), // Display the value as a string
       },
     },
   };

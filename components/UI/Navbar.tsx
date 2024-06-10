@@ -5,7 +5,7 @@ import Link from "next/link";
 
 function Navbar() {
   return (
-    <div className="w-full h-20 sticky top-0 z-30 shadow-lg bg-slate-400  dark:bg-slate-800">
+    <div className="w-full h-20 px-4 sticky top-0 z-30 shadow-lg bg-slate-400  dark:bg-slate-800">
       <div className="w-full h-full container mx-auto flex items-center justify-between">
         <Link href={"/"} className="h-16 container mx-auto transition-all">
           <Image

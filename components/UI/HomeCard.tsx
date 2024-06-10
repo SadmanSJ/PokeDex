@@ -10,13 +10,7 @@ interface Props {
 }
 
 async function HomeCard({ pokemon }: Props) {
-  // console.log(
-  //   GetSpriteURL.pokemon({
-  //     id: pokemon.id,
-  //     spriteType: "home",
-  //   }),
-  //   pokemon.sprites.other.home
-  // );
+  if (!pokemon) return;
 
   return (
     <div className="relative mx-auto flex flex-col items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-800 border shadow-lg dark:border-gray-800 p-4 m-2 font-kanit">

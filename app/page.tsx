@@ -1,26 +1,46 @@
-import ThemeChangeButton from "@/components/Buttons/ThemeChangeButton";
-import HomeCard from "@/components/UI/HomeCard";
-import Image from "next/image";
+import GenerationSelectorWithSearch from "@/components/UI/GenerationSelectorWithSearch";
+import PokemonList from "@/components/UI/PokemonList";
+import { Generation } from "@/interface";
+import { pokeApi } from "@/secret/api";
 
-export default async function Home() {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
-  );
-  const data = await res.json();
-  const allResponse = await Promise.all(
-    data.results.map((m: any) => fetch(m.url))
-  );
+import { Suspense } from "react";
 
-  const allPokemon = await Promise.all(allResponse.map((m: any) => m.json()));
+interface PageProps {
+  searchParams: { viewGen: string; query: string };
+}
+
+const fetchGeneration = async (selectedValue: any) => {
+  const [resource, id] = selectedValue.split("-");
+  const url = `${pokeApi}${resource}/${id}/`;
+  const generation = await fetch(url).then<Generation>((res) => res.json());
+  return generation;
+};
+
+export default async function Home({ searchParams }: PageProps) {
+  const viewGen = searchParams.viewGen || "generation-1";
+  const query = searchParams.query || "";
+
+  const generation = await fetchGeneration(viewGen);
+
+  const generationList = await fetch(pokeApi + "generation").then((res) =>
+    res.json()
+  );
 
   return (
-    <div className="w-full py-4 transition-all">
-      <div className="text-3xl p-4">Kento Pokemon</div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full place-content-center">
-        {allPokemon.map((m: any, i: number) => (
-          <HomeCard key={i} pokemon={m} />
-        ))}
-      </div>
+    <div className="w-full py-4 flex  flex-col-reverse sm:flex-col transition-all">
+      <Suspense fallback={<div>Loading...</div>}>
+        <GenerationSelectorWithSearch
+          generationList={generationList}
+          currentGen={viewGen}
+          query={query}
+        />
+      </Suspense>
+      <PokemonList
+        species={generation.pokemon_species.filter((f) =>
+          f.name.includes(searchParams.query || "")
+        )}
+        region={generation.main_region}
+      />
     </div>
   );
 }

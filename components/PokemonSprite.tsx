@@ -6,7 +6,7 @@ import React from "react";
 interface Props {
   name: any;
 }
-async function Pokemon({ name }: Props) {
+async function PokemonSprite({ name }: Props) {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const pokemon = await res.json();
 
@@ -34,4 +34,4 @@ async function Pokemon({ name }: Props) {
   );
 }
 
-export default Pokemon;
+export default PokemonSprite;

@@ -10,6 +10,7 @@ export default function LoadingComponent() {
         alt="Pokeball"
         width={300}
         height={300}
+        priority
       />
     </div>
   );

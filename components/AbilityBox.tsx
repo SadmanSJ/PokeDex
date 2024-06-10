@@ -5,8 +5,9 @@ interface Props {
   abilities: any[];
 }
 async function AbilityBox({ abilities }: Props) {
-  const res = await Promise.all(abilities.map((m) => fetch(m.ability.url)));
-  const data = await Promise.all(res.map((m) => m.json()));
+  const data = await Promise.all(
+    abilities.map((m) => fetch(m.ability.url).then((res) => res.json()))
+  );
 
   return (
     <div className="relative w-full text-xl p-3 bg-slate-100 dark:bg-slate-600 rounded-lg font-kanit">

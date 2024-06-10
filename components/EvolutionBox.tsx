@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Pokemon from "./Pokemon";
+import PokemonSprite from "./PokemonSprite";
 import { formatName } from "@/functions/formatNames";
 
 interface Props {
@@ -68,7 +68,10 @@ const Evolution = ({ chain, parent }: any) => {
         parentPokemon = ` on ${parentPokemon}`;
         const item = `Use ${formatName(details.item?.name || "")}`;
         return (
-          <div className="flex flex-col items-center justify-center pt-2">
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center pt-2"
+          >
             <p className="flex justify-center">{item + parentPokemon}</p>
             {index < length - 1 && <div className="pt-2">Or</div>}
           </div>
@@ -80,7 +83,10 @@ const Evolution = ({ chain, parent }: any) => {
           ? ` while holding ${formatName(details.held_item?.name || "")}`
           : "";
         return (
-          <div className="flex flex-col items-center justify-center pt-2">
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center pt-2"
+          >
             <p className="flex justify-center">{parentPokemon + heldItem}</p>
             {index < length - 1 && <div className="pt-2">Or</div>}
           </div>
@@ -106,7 +112,10 @@ const Evolution = ({ chain, parent }: any) => {
           : "";
 
         return (
-          <div className="flex flex-col items-center justify-center pt-2">
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center pt-2"
+          >
             <p className="flex justify-center">
               {parentPokemon +
                 minLevel +
@@ -119,7 +128,7 @@ const Evolution = ({ chain, parent }: any) => {
           </div>
         );
       default:
-        return <div></div>;
+        return <div key={index}></div>;
     }
   };
 
@@ -127,7 +136,7 @@ const Evolution = ({ chain, parent }: any) => {
     <Fragment>
       <div className="w-full flex items-center justify-center">
         <div className="flex h-full flex-col items-center">
-          <Pokemon name={species.name} />
+          <PokemonSprite name={species.name} />
           <div className="secondaryText text-center text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
             {evolution_details.map((details: Details, i: number) =>
               getEvolveMethod(details, parent, i, evolution_details.length)

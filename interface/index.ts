@@ -245,7 +245,7 @@ interface EvolutionTrigger {
 }
 
 /** A generation is a grouping of the Pokémon games that separates them based on the Pokémon they include. In each generation, a new set of Pokémon, Moves, Abilities and Types that did not exist in the previous generation are released. */
-interface Generation {
+export interface Generation {
   /** The identifier for this resource. */
   id: number;
   /** The name for this resource. */
@@ -537,7 +537,7 @@ interface Machine {
 }
 
 /** Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn. Some moves (including those learned by Hidden Machine) can be used outside of battle as well, usually for the purpose of removing obstacles or exploring new areas. */
-interface Move {
+export interface Move {
   /** The identifier for this resource. */
   id: number;
   /** The name for this resource. */
@@ -979,7 +979,7 @@ interface PokemonHeldItemVersion {
   rarity: number;
 }
 
-interface PokemonMove {
+export interface PokemonMove {
   /** The move the Pokémon can learn. */
   move: NamedAPIResource<Move>;
   /** The details of the version in which the Pokémon can learn the move. */
