@@ -111,8 +111,8 @@ async function PokemonDetails({ params }: Props) {
         </div>
         {species.varieties.length > 1 && (
           <div className="col-span-1 sm:col-span-2 w-full flex flex-col items-center justify-center px-2">
-            <div className="labelText">Forms</div>
-            <div className="flex items-start justify-evenly w-full">
+            <div className="labelText">Variants</div>
+            <div className="w-full flex items-center justify-evenly overflow-auto space-x-6">
               {species.varieties.map((m, i) => (
                 <PokemonSprite key={i} name={m.pokemon.name} />
               ))}
