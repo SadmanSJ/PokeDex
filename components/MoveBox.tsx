@@ -11,7 +11,11 @@ interface Props {
 
 export default async function MoveBox({ moves, title }: Props) {
   const data = await Promise.all(
-    moves.map((m) => fetch(m.move.url).then<Move>((res) => res.json()))
+    moves.map((m) =>
+      fetch(m.move.url, { next: { revalidate: 5000 } }).then<Move>((res) =>
+        res.json()
+      )
+    )
   );
 
   return (

@@ -8,9 +8,9 @@ interface Props {
   name: any;
 }
 async function PokemonSprite({ name }: Props) {
-  const pokemon = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${name}`
-  ).then<Pokemon>((res) => res.json());
+  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
+    next: { revalidate: 5000 },
+  }).then<Pokemon>((res) => res.json());
 
   //   console.log(pokemon.sprites);
 

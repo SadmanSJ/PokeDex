@@ -18,12 +18,13 @@ interface Props {
 
 async function PokemonDetails({ params }: Props) {
   const pokemon = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${params.name}`
+    `https://pokeapi.co/api/v2/pokemon/${params.name}`,
+    { next: { revalidate: 5000 } }
   ).then<Pokemon>((res) => res.json());
 
-  const species = await fetch(pokemon.species.url).then<PokemonSpecies>((res) =>
-    res.json()
-  );
+  const species = await fetch(pokemon.species.url, {
+    next: { revalidate: 5000 },
+  }).then<PokemonSpecies>((res) => res.json());
 
   const movesLearnMethods: string[] = [
     ...new Set(

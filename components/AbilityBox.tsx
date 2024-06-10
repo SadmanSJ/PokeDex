@@ -6,7 +6,11 @@ interface Props {
 }
 async function AbilityBox({ abilities }: Props) {
   const data = await Promise.all(
-    abilities.map((m) => fetch(m.ability.url).then((res) => res.json()))
+    abilities.map((m) =>
+      fetch(m.ability.url, { next: { revalidate: 5000 } }).then((res) =>
+        res.json()
+      )
+    )
   );
 
   return (

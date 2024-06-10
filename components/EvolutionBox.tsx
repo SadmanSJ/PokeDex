@@ -36,7 +36,9 @@ interface DetailsItem {
 }
 
 export default async function EvolutionBox({ species }: Props) {
-  const res = await fetch(species.evolution_chain.url);
+  const res = await fetch(species.evolution_chain.url, {
+    next: { revalidate: 5000 },
+  });
   const evolutionChain = await res.json();
 
   return (

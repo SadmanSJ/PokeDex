@@ -28,7 +28,7 @@ const GenerationSelectorWithSearch = ({
   }));
 
   return (
-    <div className="sticky bottom-0 sm:top-20 z-20 flex items-center bg-slate-200 dark:bg-slate-700 w-full py-2 px-4 justify-between space-x-4 sm:space-x-6 md:space-x-10 text-xs">
+    <div className="sticky top-20 z-20 flex items-center bg-slate-200 dark:bg-slate-700 w-full py-2 px-4 justify-between space-x-4 sm:space-x-6 md:space-x-10 text-xs">
       <div className="flex p-1 grow items-center w-full bg-slate-300 dark:bg-slate-800 rounded-lg">
         <input
           className="w-full p-1 sm:p-2 bg-transparent focus:outline-none font-mono placeholder:text-gray-500/80 dark:placeholder:text-gray-400/70"

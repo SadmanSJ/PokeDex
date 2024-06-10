@@ -12,7 +12,9 @@ interface PageProps {
 const fetchGeneration = async (selectedValue: any) => {
   const [resource, id] = selectedValue.split("-");
   const url = `${pokeApi}${resource}/${id}/`;
-  const generation = await fetch(url).then<Generation>((res) => res.json());
+  const generation = await fetch(url, {
+    next: { revalidate: 5000 },
+  }).then<Generation>((res) => res.json());
   return generation;
 };
 
@@ -22,12 +24,12 @@ export default async function Home({ searchParams }: PageProps) {
 
   const generation = await fetchGeneration(viewGen);
 
-  const generationList = await fetch(pokeApi + "generation").then((res) =>
-    res.json()
-  );
+  const generationList = await fetch(pokeApi + "generation", {
+    next: { revalidate: 5000 },
+  }).then((res) => res.json());
 
   return (
-    <div className="w-full py-4 flex  flex-col-reverse sm:flex-col transition-all">
+    <div className="w-full py-4 flex flex-col transition-all">
       <Suspense fallback={<div>Loading...</div>}>
         <GenerationSelectorWithSearch
           generationList={generationList}

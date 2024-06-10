@@ -10,7 +10,9 @@ interface Props {
 export default async function PokemonList({ species, region }: Props) {
   const pokemon = await Promise.all(
     species.map((m: any) =>
-      fetch("https://pokeapi.co/api/v2/pokemon/" + m.name)
+      fetch("https://pokeapi.co/api/v2/pokemon/" + m.name, {
+        next: { revalidate: 5000 },
+      })
         .then((res) => res.json())
         .catch((err) => console.log(err))
     )

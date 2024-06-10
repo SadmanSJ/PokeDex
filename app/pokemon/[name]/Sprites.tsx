@@ -16,7 +16,7 @@ function Sprites({ sprites }: Props) {
           width={700}
           height={700}
           draggable={false}
-          loading="lazy"
+          priority
         />
       </div>
       {/* <div className="flex justify-between">
