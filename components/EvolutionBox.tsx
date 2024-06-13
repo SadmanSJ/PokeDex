@@ -42,7 +42,7 @@ export default async function EvolutionBox({ species }: Props) {
   const evolutionChain = await res.json();
 
   return (
-    <div className="flex flex-col items-center w-full labelText">
+    <div className="flex flex-col items-center w-full p-3 rounded-lg labelText shadow-inner bg-slate-100 dark:bg-slate-600">
       Evolution Chain
       <div className="w-full flex justify-evenly space-x-4 overflow-auto">
         <Evolution chain={evolutionChain.chain} parent={null} />

@@ -1,7 +1,7 @@
 import AbilityBox from "@/components/AbilityBox";
 import TypeBox from "@/components/TypeBox";
 import Image from "next/image";
-import React, { Suspense } from "react";
+import React from "react";
 import Sprites from "./Sprites";
 import StatsBox from "@/components/StatsBox";
 import MoveBox from "@/components/MoveBox";
@@ -10,6 +10,8 @@ import { Pokemon, PokemonSpecies } from "@/interface";
 import { formatName } from "@/functions/formatNames";
 import Link from "next/link";
 import PokemonSprite from "@/components/PokemonSprite";
+import SpriteSlider from "@/components/Slider/SpriteSlider";
+import SliderComponent from "@/components/Slider/SliderComponent";
 
 interface Props {
   params: { name: string };
@@ -48,7 +50,23 @@ async function PokemonDetails({ params }: Props) {
   return (
     <div className="font-kanit w-full h-full flex  p-4 text-slate-700 dark:text-slate-50">
       <div className="relative w-full grid grid-cols-1 sm:grid-cols-2 gap-6 place-content-center">
-        <Sprites sprites={pokemon.sprites} />
+        <SpriteSlider>
+          {Object.keys(pokemon.sprites.other["official-artwork"]).map(
+            (m, i) => (
+              <div key={i}>
+                <Sprites
+                  source={
+                    pokemon.sprites.other["official-artwork"][
+                      m as keyof (typeof pokemon.sprites.other)["official-artwork"]
+                    ]
+                  }
+                  spriteProfile={formatName(m)}
+                />
+              </div>
+            )
+          )}
+          {/* {Object.keys(pokemon.sprites)} */}
+        </SpriteSlider>
         <div className="w-full flex flex-col item-start">
           <div className="flex items-center justify-center pt-3 mt-auto mx-auto">
             <div className="w-8 md:w-9 lg:w-10 xl:w-11 2xl:w-12 aspect-square">
@@ -76,7 +94,7 @@ async function PokemonDetails({ params }: Props) {
         <div className="w-full p-4 flex flex-col items-center justify-between primaryText">
           {species.evolves_from_species && (
             <div className=" w-full flex items-center justify-between space-x-4">
-              <p>Evolve from :</p>
+              <p>Evolved from :</p>
               <Link href={"#evolution-chain"} className="font-bold">
                 {formatName(species.evolves_from_species.name)}
               </Link>
@@ -113,11 +131,20 @@ async function PokemonDetails({ params }: Props) {
         {species.varieties.length > 1 && (
           <div className="col-span-1 sm:col-span-2 w-full flex flex-col items-center justify-center px-2">
             <div className="labelText">Variants</div>
-            <div className="w-full flex items-center justify-evenly overflow-auto space-x-6">
+
+            <SliderComponent slidesToShow={3}>
+              {species.varieties.map((m, i) => (
+                <div key={i} className="w-20">
+                  <PokemonSprite name={m.pokemon.name} />
+                </div>
+              ))}
+            </SliderComponent>
+
+            {/* <div className="w-full flex items-center justify-evenly overflow-auto space-x-6">
               {species.varieties.map((m, i) => (
                 <PokemonSprite key={i} name={m.pokemon.name} />
               ))}
-            </div>
+            </div> */}
           </div>
         )}
         <div

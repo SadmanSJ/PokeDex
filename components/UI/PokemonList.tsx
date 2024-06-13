@@ -20,7 +20,7 @@ export default async function PokemonList({ species, region }: Props) {
 
   if (pokemon.length < 1)
     return (
-      <div className="flex items-center justify-center h-[70vh] secondaryText">
+      <div className="flex p-4 text-center items-center justify-center h-[70vh] secondaryText">
         No Pokemon Found. Try on different Generation
       </div>
     );
